@@ -31,6 +31,12 @@ public class Card extends Parent {
 
     @Override
     public String toString() {
-        return "";
+        return rank.toString() + " of " + suit.toString();
+    }
+
+    @Override
+    public boolean equals(Object card) {
+        if (!(card instanceof Card)) return false;
+        return ((Card) card).rank.value == this.rank.value && ((Card) card).suit == this.suit;
     }
 }
