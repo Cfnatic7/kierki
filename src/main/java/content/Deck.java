@@ -15,6 +15,8 @@ public class Deck {
         refill();
     }
 
+
+
     public final void refill() {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
@@ -31,11 +33,15 @@ public class Deck {
         return card;
     }
 
-    public Card getCard(Rank rank, Suit suit) throws CardNotFoundException {
+    public Card useCard(Rank rank, Suit suit) throws CardNotFoundException {
         int index = cards.indexOf(new Card(rank, suit));
         if (index == -1) throw new CardNotFoundException();
         Card card = cards.get(index);
         cards.remove(index);
         return card;
+    }
+
+    public void addCard(Card card) {
+        cards.add(card);
     }
 }
