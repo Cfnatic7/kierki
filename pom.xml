@@ -42,7 +42,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>Kierki</mainClass>
+                    <mainClass>app.Kierki</mainClass>
                 </configuration>
             </plugin>
         </plugins>

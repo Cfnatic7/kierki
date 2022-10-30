@@ -1,3 +1,5 @@
+package app;
+
 import content.Deck;
 import content.Hand;
 import javafx.application.Application;
@@ -48,5 +50,9 @@ public class Kierki extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static Scene getScene() {
+        return scene;
     }
 }
