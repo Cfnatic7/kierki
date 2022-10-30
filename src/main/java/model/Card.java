@@ -1,4 +1,4 @@
-package content;
+package model;
 
 import enums.Rank;
 import enums.Suit;

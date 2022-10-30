@@ -1,9 +1,6 @@
-package content;
+package model;
 
 import Exceptions.CardNotFoundException;
-import enums.Rank;
-import enums.Suit;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 

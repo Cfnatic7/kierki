@@ -1,4 +1,4 @@
-package content;
+package model;
 
 import Exceptions.CardNotFoundException;
 import Exceptions.EmptyDeckException;

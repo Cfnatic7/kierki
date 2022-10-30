@@ -1,7 +1,7 @@
 package app;
 
-import content.Deck;
-import content.Hand;
+import model.Deck;
+import model.Hand;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="659.0" prefWidth="1007.0" style="-fx-background-color: darkslategrey;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Table">
+   <children>
+      <Button layoutX="697.0" layoutY="613.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="poddaj się" AnchorPane.bottomAnchor="14.399999999999977" AnchorPane.leftAnchor="697.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="613.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

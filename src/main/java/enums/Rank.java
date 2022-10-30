@@ -1,9 +1,9 @@
 package enums;
 
 public enum Rank {
-    TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6),
-    SEVEN(7), EIGHT(8), NINE(9), TEN(10), JACK(11),
-    QUEEN(12), KING(13), ACE(14);
+    DWA(2), TRZY(3), CZTERY(4), PIĘĆ(5), SZEŚĆ(6),
+    SIEDEM(7), OSIEM(8), DZIEWIĘĆ(9), DZIESIĘĆ(10), WALET(11),
+    DAMA(12), KRÓL(13), AS(14);
 
     public final int value;
     private Rank(int value) {
