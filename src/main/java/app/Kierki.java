@@ -32,9 +32,12 @@ public class Kierki extends Application {
 
     private static Scene scene;
 
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) {
         try {
+            Kierki.primaryStage = primaryStage;
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/initial-view.fxml")));
             scene = new Scene(root);
         } catch(Exception e) {
@@ -54,5 +57,9 @@ public class Kierki extends Application {
 
     public static Scene getScene() {
         return scene;
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

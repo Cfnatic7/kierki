@@ -13,8 +13,8 @@ public class LoginForm {
 
     public void onLogin(ActionEvent e) throws IOException {
         Scene scene = Kierki.getScene();
-        Parent rooms = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/rooms.fxml")));
-        scene.setRoot(rooms);
+        FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
+        scene.setRoot(roomLoader.load());
     }
 
 }
