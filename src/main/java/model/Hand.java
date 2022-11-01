@@ -14,9 +14,12 @@ public class Hand {
 
     private final Player player;
 
-    public Hand(Player player) {
+    private final Table tableModel;
+
+    public Hand(Player player, Table tableModel) {
         cards = FXCollections.observableArrayList();
         this.player = player;
+        this.tableModel = tableModel;
     }
 
     public void drawCardsFromDeck() throws EmptyDeckException {

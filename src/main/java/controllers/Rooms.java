@@ -14,7 +14,6 @@ public class Rooms {
         AnchorPane table = tableLoader.load();
         Table tableController = tableLoader.getController();
         tableController.init();
-        tableController.initializeTextNodes();
         Kierki.getScene().setRoot(table);
     }
 

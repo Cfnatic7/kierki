@@ -40,4 +40,8 @@ public class Card {
     public Boolean getIsOpponent() {
         return this.isOpponent;
     }
+
+    public Hand getHandModel() {
+        return this.handModel;
+    }
 }

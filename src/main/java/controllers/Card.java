@@ -33,6 +33,8 @@ public class Card {
     }
 
     public void onClick() {
+        if (!cardModel.get().getHandModel().getPlayer().isTurn()) return;
+
         AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
         var cards = handPane.getChildren();
         cards.forEach(card -> card.setLayoutY(initialYLayout));
@@ -42,6 +44,8 @@ public class Card {
         else {
             this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
         }
+        cardModel.get().getHandModel().getPlayer().setCardPlayed(cardModel.get());
+        cardModel.get().getHandModel().getPlayer().setTurn(false);
     }
 
     public Text getColor() {

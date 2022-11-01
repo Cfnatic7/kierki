@@ -4,13 +4,18 @@ public class Player {
 
     private boolean isEnemy;
 
+    private boolean firstTurn;
+
     private Card cardPlayed;
 
     private boolean turn;
 
-    public Player(boolean isEnemy, boolean turn) {
+    private Player oppositePlayer;
+
+    public Player(boolean isEnemy, boolean turn, boolean firstTurn) {
         this.isEnemy = isEnemy;
         this.turn = turn;
+        this.firstTurn = firstTurn;
     }
 
     public Card getCardPlayed() {
@@ -36,5 +41,22 @@ public class Player {
     public void setEnemy(boolean enemy) {
         isEnemy = enemy;
     }
+
+    public Player getOppositePlayer() {
+        return oppositePlayer;
+    }
+
+    public void setOppositePlayer(Player oppositePlayer) {
+        this.oppositePlayer = oppositePlayer;
+    }
+
+    public boolean isFirstTurn() {
+        return firstTurn;
+    }
+
+    public void setFirstTurn(boolean firstTurn) {
+        this.firstTurn = firstTurn;
+    }
+
 
 }
