@@ -17,13 +17,13 @@ public class Table {
     public void init() throws IOException, EmptyDeckException {
         FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane firstHand = firstHandLoader.load();
-        model.Hand firstHandModel = new model.Hand(false);
+        model.Hand firstHandModel = new model.Hand(true);
         firstHandController = firstHandLoader.getController();
         firstHandController.initModel(firstHandModel);
 
         FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane secondHand = secondHandLoader.load();
-        model.Hand secondHandModel = new model.Hand(true);
+        model.Hand secondHandModel = new model.Hand(false);
         secondHandController = secondHandLoader.getController();
         secondHandController.initModel(secondHandModel);
 

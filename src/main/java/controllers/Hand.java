@@ -35,8 +35,9 @@ public class Hand {
             cardController.initModel(card);
             cardPane.setLayoutX(cardPane.getLayoutX() + xOffset);
             cardPane.setLayoutY(cardPane.getLayoutY() + 75);
+            cardController.setInitialYLayout(cardPane.getLayoutY());
 
-            xOffset += 50;
+            xOffset += 40;
             cardsInPossesion.getChildren().add(cardPane);
         }
     }

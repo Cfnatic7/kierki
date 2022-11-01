@@ -12,7 +12,7 @@ public class Hand {
 
     private final static int HALF_THE_DECK = 26;
 
-    private boolean isOpponent;
+    private final boolean isOpponent;
 
     public Hand(boolean isOpponent) throws EmptyDeckException {
         cards = FXCollections.observableArrayList();
@@ -21,7 +21,9 @@ public class Hand {
 
     public void drawCardsFromDeck() throws EmptyDeckException {
         for (int i = 0; i < HALF_THE_DECK; i++) {
-            cards.add(new SimpleObjectProperty<>(Deck.drawCard()));
+            Card card = Deck.drawCard();
+            card.setIsOpponent(this.isOpponent);
+            cards.add(new SimpleObjectProperty<>(card));
         }
         if (Deck.getCards().isEmpty()) Deck.refill();
     }

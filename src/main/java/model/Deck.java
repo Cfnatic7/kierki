@@ -33,13 +33,13 @@ public class Deck {
         return card;
     }
 
-    public static Card useCard(Rank rank, Suit suit) throws CardNotFoundException {
-        int index = cards.indexOf(new Card(rank, suit));
-        if (index == -1) throw new CardNotFoundException();
-        Card card = cards.get(index);
-        cards.remove(index);
-        return card;
-    }
+//    public static Card useCard(Rank rank, Suit suit) throws CardNotFoundException {
+//        int index = cards.indexOf(new Card(rank, suit, this));
+//        if (index == -1) throw new CardNotFoundException();
+//        Card card = cards.get(index);
+//        cards.remove(index);
+//        return card;
+//    }
 
     public void addCard(Card card) {
         cards.add(card);
