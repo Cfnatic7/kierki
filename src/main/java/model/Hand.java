@@ -12,8 +12,11 @@ public class Hand {
 
     private final static int HALF_THE_DECK = 26;
 
-    public Hand() throws EmptyDeckException {
+    private boolean isOpponent;
+
+    public Hand(boolean isOpponent) throws EmptyDeckException {
         cards = FXCollections.observableArrayList();
+        this.isOpponent = isOpponent;
     }
 
     public void drawCardsFromDeck() throws EmptyDeckException {
@@ -36,5 +39,9 @@ public class Hand {
 
     public ObservableList<SimpleObjectProperty<Card>> getCards() {
         return this.cards;
+    }
+
+    public boolean isOpponent() {
+        return this.isOpponent;
     }
 }

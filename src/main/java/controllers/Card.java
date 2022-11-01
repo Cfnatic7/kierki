@@ -2,22 +2,26 @@ package controllers;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class Card {
 
+    @FXML
+    private AnchorPane cardPane;
     @FXML
     private Text color;
 
     @FXML
     private Text value;
 
-    private SimpleObjectProperty<model.Card> cardModel;
+    private SimpleObjectProperty<model.Card> cardModel = null;
 
     public void initModel(SimpleObjectProperty<model.Card> cardModel) {
-        if (cardModel != null) {
-            throw new IllegalStateException("Model can only be initialized once");
-        }
+//        if (cardModel != null) {
+//            throw new IllegalStateException("Model can only be initialized once");
+//        }
+        this.cardModel = cardModel;
         this.setColor(this.cardModel.get().suit.toString());
         this.setValue(this.cardModel.get().rank.toString());
     }

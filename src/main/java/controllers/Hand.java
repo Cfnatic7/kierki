@@ -9,30 +9,35 @@ import java.io.IOException;
 
 public class Hand {
 
+    public AnchorPane cardsInPossesion;
     private model.Hand handModel;
 
     public model.Hand getHandModel() {
         return this.handModel;
     }
 
-    public void initModel() throws EmptyDeckException, IOException {
+    public void initModel(model.Hand hand) throws EmptyDeckException, IOException {
         if (this.handModel != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
-        handModel = new model.Hand();
+        handModel = hand;
         handModel.drawCardsFromDeck();
         this.renderAllCards();
     }
 
     private void renderAllCards() throws IOException {
-        int xOffset = 0;
+        int xOffset = 5;
+        FXMLLoader loader;
         for (SimpleObjectProperty<model.Card> card : handModel.getCards()) {
-            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/card.fxml"));
-            AnchorPane cardPane = cardLoader.load();
-            Card cardController = cardLoader.getController();
+            loader = new FXMLLoader();
+            AnchorPane cardPane = loader.load(getClass().getResource("/card.fxml").openStream());
+            Card cardController = loader.getController();
             cardController.initModel(card);
             cardPane.setLayoutX(cardPane.getLayoutX() + xOffset);
-            xOffset += 10;
+            cardPane.setLayoutY(cardPane.getLayoutY() + 75);
+
+            xOffset += 50;
+            cardsInPossesion.getChildren().add(cardPane);
         }
     }
 
