@@ -12,17 +12,18 @@ public class Hand {
 
     private final static int HALF_THE_DECK = 26;
 
-    private final boolean isOpponent;
+    private final Player player;
 
-    public Hand(boolean isOpponent) throws EmptyDeckException {
+    public Hand(Player player) {
         cards = FXCollections.observableArrayList();
-        this.isOpponent = isOpponent;
+        this.player = player;
     }
 
     public void drawCardsFromDeck() throws EmptyDeckException {
         for (int i = 0; i < HALF_THE_DECK; i++) {
             Card card = Deck.drawCard();
-            card.setIsOpponent(this.isOpponent);
+            card.setIsOpponent(this.player.isEnemy());
+            card.setHandModel(this);
             cards.add(new SimpleObjectProperty<>(card));
         }
         if (Deck.getCards().isEmpty()) Deck.refill();
@@ -43,7 +44,7 @@ public class Hand {
         return this.cards;
     }
 
-    public boolean isOpponent() {
-        return this.isOpponent;
+    public Player getPlayer() {
+        return this.player;
     }
 }

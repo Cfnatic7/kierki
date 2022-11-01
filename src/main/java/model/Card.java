@@ -10,9 +10,16 @@ public class Card {
     public final Suit suit;
 
     public Boolean isOpponent;
+
+    private Hand handModel;
+
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
+    }
+
+    public void setHandModel(Hand handModel) {
+        this.handModel = handModel;
     }
 
     @Override

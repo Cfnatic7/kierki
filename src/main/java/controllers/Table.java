@@ -2,13 +2,22 @@ package controllers;
 
 import Exceptions.EmptyDeckException;
 import app.Kierki;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import model.Player;
 
 import java.io.IOException;
 
 public class Table {
+
+    @FXML
+    private Text enemyPlayerPoints;
+
+    @FXML
+    private Text ourPlayerPoints;
 
     private Hand firstHandController;
 
@@ -17,13 +26,15 @@ public class Table {
     public void init() throws IOException, EmptyDeckException {
         FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane firstHand = firstHandLoader.load();
-        model.Hand firstHandModel = new model.Hand(true);
+        Player enemyPlayerModel = new Player(true, false);
+        model.Hand firstHandModel = new model.Hand(enemyPlayerModel);
         firstHandController = firstHandLoader.getController();
         firstHandController.initModel(firstHandModel);
 
         FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane secondHand = secondHandLoader.load();
-        model.Hand secondHandModel = new model.Hand(false);
+        Player ourPlayerModel = new Player(false, true);
+        model.Hand secondHandModel = new model.Hand(ourPlayerModel);
         secondHandController = secondHandLoader.getController();
         secondHandController.initModel(secondHandModel);
 
@@ -35,5 +46,10 @@ public class Table {
         Scene scene = Kierki.getScene();
         scene.setRoot(table);
         Kierki.getPrimaryStage().sizeToScene();
+    }
+
+    public void initializeTextNodes() {
+        enemyPlayerPoints.setText("Points: 0");
+        ourPlayerPoints.setText("Points: 0");
     }
 }

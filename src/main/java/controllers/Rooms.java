@@ -12,6 +12,7 @@ public class Rooms {
         tableLoader.load();
         Table tableController = tableLoader.getController();
         tableController.init();
+        tableController.initializeTextNodes();
     }
 
 }
