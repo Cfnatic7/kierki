@@ -14,6 +14,9 @@ import java.io.IOException;
 public class Table {
 
     @FXML
+    private AnchorPane table;
+
+    @FXML
     private Text enemyPlayerPoints;
 
     @FXML
@@ -24,28 +27,36 @@ public class Table {
     private Hand secondHandController;
 
     public void init() throws IOException, EmptyDeckException {
-        FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        AnchorPane firstHand = firstHandLoader.load();
-        Player enemyPlayerModel = new Player(true, false);
-        model.Hand firstHandModel = new model.Hand(enemyPlayerModel);
-        firstHandController = firstHandLoader.getController();
-        firstHandController.initModel(firstHandModel);
+        AnchorPane firstHand = getFirstHand();
 
-        FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        AnchorPane secondHand = secondHandLoader.load();
-        Player ourPlayerModel = new Player(false, true);
-        model.Hand secondHandModel = new model.Hand(ourPlayerModel);
-        secondHandController = secondHandLoader.getController();
-        secondHandController.initModel(secondHandModel);
+        AnchorPane secondHand = getSecondHand();
 
-        FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/table.fxml"));
-        AnchorPane table = tableLoader.load();
         table.getChildren().add(firstHand);
         table.getChildren().add(secondHand);
         secondHand.setLayoutY(450);
         Scene scene = Kierki.getScene();
         scene.setRoot(table);
         Kierki.getPrimaryStage().sizeToScene();
+    }
+
+    private AnchorPane getSecondHand() throws IOException, EmptyDeckException {
+        FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
+        AnchorPane secondHand = secondHandLoader.load();
+        Player ourPlayerModel = new Player(false, true);
+        model.Hand secondHandModel = new model.Hand(ourPlayerModel);
+        secondHandController = secondHandLoader.getController();
+        secondHandController.initModel(secondHandModel);
+        return secondHand;
+    }
+
+    private AnchorPane getFirstHand() throws IOException, EmptyDeckException {
+        FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
+        AnchorPane firstHand = firstHandLoader.load();
+        Player enemyPlayerModel = new Player(true, false);
+        model.Hand firstHandModel = new model.Hand(enemyPlayerModel);
+        firstHandController = firstHandLoader.getController();
+        firstHandController.initModel(firstHandModel);
+        return firstHand;
     }
 
     public void initializeTextNodes() {
