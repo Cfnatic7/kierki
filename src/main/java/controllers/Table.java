@@ -1,5 +1,6 @@
 package controllers;
 
+import Exceptions.EmptyDeckException;
 import app.Kierki;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,14 +14,16 @@ public class Table {
 
     private Hand secondHandController;
 
-    public void init() throws IOException {
+    public void init() throws IOException, EmptyDeckException {
         FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        firstHandController = firstHandLoader.getController();
         AnchorPane firstHand = firstHandLoader.load();
+        firstHandController = firstHandLoader.getController();
+        firstHandController.initModel();
 
         FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane secondHand = secondHandLoader.load();
         secondHandController = secondHandLoader.getController();
+        secondHandController.initModel();
 
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/table.fxml"));
         AnchorPane table = tableLoader.load();

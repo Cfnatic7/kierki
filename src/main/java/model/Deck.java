@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Deck {
 
-    private final List<Card> cards = new ArrayList<>(52);
+    private static final List<Card> cards = new ArrayList<>(52);
 
     public Deck() {
         refill();
@@ -17,7 +17,7 @@ public class Deck {
 
 
 
-    public final void refill() {
+    public static void refill() {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 cards.add(new Card(rank, suit));
@@ -26,14 +26,14 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    public Card drawCard() throws EmptyDeckException {
+    public static Card drawCard() throws EmptyDeckException {
         if (cards.size() == 0) throw new EmptyDeckException();
         Card card = cards.get(0);
         cards.remove(0);
         return card;
     }
 
-    public Card useCard(Rank rank, Suit suit) throws CardNotFoundException {
+    public static Card useCard(Rank rank, Suit suit) throws CardNotFoundException {
         int index = cards.indexOf(new Card(rank, suit));
         if (index == -1) throw new CardNotFoundException();
         Card card = cards.get(index);
@@ -43,5 +43,9 @@ public class Deck {
 
     public void addCard(Card card) {
         cards.add(card);
+    }
+
+    public static List<Card> getCards() {
+        return cards;
     }
 }

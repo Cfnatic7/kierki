@@ -1,7 +1,8 @@
 package controllers;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import org.w3c.dom.Text;
+import javafx.scene.text.Text;
 
 public class Card {
 
@@ -11,20 +12,30 @@ public class Card {
     @FXML
     private Text value;
 
+    private SimpleObjectProperty<model.Card> cardModel;
+
+    public void initModel(SimpleObjectProperty<model.Card> cardModel) {
+        if (cardModel != null) {
+            throw new IllegalStateException("Model can only be initialized once");
+        }
+        this.setColor(this.cardModel.get().suit.toString());
+        this.setValue(this.cardModel.get().rank.toString());
+    }
+
     public Text getColor() {
         return color;
     }
 
-    public void setColor(Text color) {
-        this.color = color;
+    public void setColor(String color) {
+        this.color.textProperty().setValue(color);
     }
 
     public Text getValue() {
         return value;
     }
 
-    public void setValue(Text value) {
-        this.value = value;
+    public void setValue(String value) {
+        this.value.textProperty().setValue(value);
     }
 
 }

@@ -1,19 +1,26 @@
 package model;
 
 import Exceptions.CardNotFoundException;
+import Exceptions.EmptyDeckException;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 
 public class Hand {
 
-    private ObservableList<Node> cards;
+    private final ObservableList<SimpleObjectProperty<Card>> cards;
 
-    public Hand(ObservableList<Node> cards) {
-        this.cards = cards;
+    private final static int HALF_THE_DECK = 26;
+
+    public Hand() throws EmptyDeckException {
+        cards = FXCollections.observableArrayList();
     }
 
-    public Hand() {
-        // initialize cards
+    public void drawCardsFromDeck() throws EmptyDeckException {
+        for (int i = 0; i < HALF_THE_DECK; i++) {
+            cards.add(new SimpleObjectProperty<>(Deck.drawCard()));
+        }
+        if (Deck.getCards().isEmpty()) Deck.refill();
     }
 
     public Card playCard(Card card) throws CardNotFoundException {
@@ -25,5 +32,9 @@ public class Hand {
 
     public void reset() {
         cards.clear();
+    }
+
+    public ObservableList<SimpleObjectProperty<Card>> getCards() {
+        return this.cards;
     }
 }
