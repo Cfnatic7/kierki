@@ -51,6 +51,7 @@ public class Table {
         Player ourPlayerModel = new Player(false, true, true);
 
         model.Hand secondHandModel = new model.Hand(ourPlayerModel, this.tableModel);
+        ourPlayerModel.setHand(secondHandModel);
         tableModel.setOurPlayerModel(secondHandModel);
         secondHandController = secondHandLoader.getController();
         secondHandController.initModel(secondHandModel);
@@ -62,6 +63,7 @@ public class Table {
         AnchorPane firstHand = firstHandLoader.load();
         Player enemyPlayerModel = new Player(true, false, false);
         model.Hand firstHandModel = new model.Hand(enemyPlayerModel, this.tableModel);
+        enemyPlayerModel.setHand(firstHandModel);
         tableModel.setOurPlayerModel(firstHandModel);
         firstHandController = firstHandLoader.getController();
         firstHandController.initModel(firstHandModel);
