@@ -33,9 +33,6 @@ public class Card {
     }
 
     public void onClick() {
-        if (!cardModel.get().getHandModel().getPlayer().isTurn()) return;
-        cardModel.get().getHandModel().getPlayer().setCardPlayed(cardModel.get());
-
         AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
         var cards = handPane.getChildren();
         cards.forEach(card -> card.setLayoutY(initialYLayout));
