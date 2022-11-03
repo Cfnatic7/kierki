@@ -11,6 +11,12 @@ import java.util.Objects;
 
 public class LoginForm {
 
+    private model.LoginForm loginFormModel;
+
+    public void initModel() {
+        loginFormModel = new model.LoginForm();
+    }
+
     public void onLogin(ActionEvent e) throws IOException {
         Scene scene = Kierki.getScene();
         FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));

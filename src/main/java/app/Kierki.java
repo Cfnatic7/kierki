@@ -12,6 +12,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 import java.util.Objects;
 
 public class Kierki extends Application {
@@ -19,6 +22,8 @@ public class Kierki extends Application {
     private static final int EXIT_SUCCESS = 0;
 
     private Deck deck = new Deck(); //for mocking
+
+    private final static int PORT = 8372;
 
     private Hand player;
 
@@ -34,9 +39,18 @@ public class Kierki extends Application {
 
     private static Stage primaryStage;
 
+    private static Socket clientSocket;
+
+    private static DataInputStream dataIn;
+
+    private static DataOutputStream dataOut;
+
     @Override
     public void start(Stage primaryStage) {
         try {
+            clientSocket = new Socket("127.0.0.1", PORT);
+            dataIn = new DataInputStream(clientSocket.getInputStream());
+            dataOut = new DataOutputStream(clientSocket.getOutputStream());
             Kierki.primaryStage = primaryStage;
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/initial-view.fxml")));
             scene = new Scene(root);
