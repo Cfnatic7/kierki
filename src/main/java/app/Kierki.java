@@ -41,9 +41,9 @@ public class Kierki extends Application {
 
     private static Socket clientSocket;
 
-    private static DataInputStream dataIn;
+    public static DataInputStream dataIn;
 
-    private static DataOutputStream dataOut;
+    public static DataOutputStream dataOut;
 
     @Override
     public void start(Stage primaryStage) {
