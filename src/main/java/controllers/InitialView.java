@@ -16,16 +16,12 @@ public class InitialView {
         Scene scene = Kierki.getScene();
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/login-form.fxml"));
         AnchorPane loginForm = loginLoader.load();
-        LoginForm loginFormController = loginLoader.getController();
-        loginFormController.initModel();
         scene.setRoot(loginForm);
     }
 
     public void registerOnClick(ActionEvent e) throws IOException {
         FXMLLoader registerLoader = new FXMLLoader(getClass().getResource("/registration-form.fxml"));
         Parent registerForm = registerLoader.load();
-        RegistrationForm registerFormController = registerLoader.getController();
-        registerFormController.initModel();
         Scene scene = Kierki.getScene();
         scene.setRoot(registerForm);
     }

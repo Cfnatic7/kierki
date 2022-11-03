@@ -19,20 +19,12 @@ public class RegistrationForm {
     @FXML
     private TextField passwordTextField;
 
-    private model.RegistrationForm registrationFormModel;
-
-    public void initModel() {
-        registrationFormModel = new model.RegistrationForm();
-    }
-
     public void onRegister(ActionEvent e) throws IOException {
         try {
-            registrationFormModel.handleRegister(loginTextField.getText(), passwordTextField.getText());
+            model.RegistrationForm.handleRegister(loginTextField.getText(), passwordTextField.getText());
             Scene scene = Kierki.getScene();
             FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/login-form.fxml"));
             AnchorPane loginForm = loginLoader.load();
-            LoginForm loginFormController = loginLoader.getController();
-            loginFormController.initModel();
             scene.setRoot(loginForm);
         } catch (BadRequestException ex) {
             throw new RuntimeException(ex);

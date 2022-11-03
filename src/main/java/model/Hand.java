@@ -12,20 +12,14 @@ public class Hand {
 
     private final static int HALF_THE_DECK = 26;
 
-    private final Player player;
 
-    private final Table tableModel;
-
-    public Hand(Player player, Table tableModel) {
+    public Hand() {
         cards = FXCollections.observableArrayList();
-        this.player = player;
-        this.tableModel = tableModel;
     }
 
     public void drawCardsFromDeck() throws EmptyDeckException {
         for (int i = 0; i < HALF_THE_DECK; i++) {
             Card card = Deck.drawCard();
-            card.setIsOpponent(this.player.isEnemy());
             card.setHandModel(this);
             cards.add(new SimpleObjectProperty<>(card));
         }
@@ -45,9 +39,5 @@ public class Hand {
 
     public ObservableList<SimpleObjectProperty<Card>> getCards() {
         return this.cards;
-    }
-
-    public Player getPlayer() {
-        return this.player;
     }
 }

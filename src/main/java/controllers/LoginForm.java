@@ -20,13 +20,10 @@ public class LoginForm {
 
     private model.LoginForm loginFormModel;
 
-    public void initModel() {
-        loginFormModel = new model.LoginForm();
-    }
 
     public void onLogin(ActionEvent e) throws IOException {
         try {
-            loginFormModel.handleLogin(loginTextField.getText(), passwordTextField.getText());
+            model.LoginForm.handleLogin(loginTextField.getText(), passwordTextField.getText());
             Scene scene = Kierki.getScene();
             FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
             scene.setRoot(roomLoader.load());

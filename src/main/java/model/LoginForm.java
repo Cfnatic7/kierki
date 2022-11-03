@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class LoginForm {
 
-    public void handleLogin(String login, String password) throws IOException, BadRequestException {
+    public static void handleLogin(String login, String password) throws IOException, BadRequestException {
         Kierki.dataOut.writeUTF(Commands.LOGIN.name());
         String response = Kierki.dataIn.readUTF();
         if (!response.equals(ServerResponses.OK.name())) {

@@ -2,30 +2,30 @@ package model;
 
 public class Table {
 
-    private Hand ourPlayerModel;
+    private static Player ourPlayerModel = new Player(false, true, true);
 
-    private Hand enemyPlayerModel;
+    private static Player enemyPlayerModel = new Player(true, false, false);
 
-    public Hand getOurPlayerModel() {
+    public static Player getOurPlayerModel() {
         return ourPlayerModel;
     }
 
-    public void setOurPlayerModel(Hand ourPlayerModel) {
-        this.ourPlayerModel = ourPlayerModel;
+    public static void setOurPlayerModel(Player ourModel) {
+        ourPlayerModel = ourModel;
     }
 
-    public Hand getEnemyPlayerModel() {
+    public Player getEnemyPlayerModel() {
         return enemyPlayerModel;
     }
 
-    public void setEnemyPlayerModel(Hand enemyPlayerModel) {
-        this.enemyPlayerModel = enemyPlayerModel;
+    public void setEnemyPlayerModel(Player enemyModel) {
+        enemyPlayerModel = enemyModel;
     }
 
-    public Table(Hand ourPlayerModel, Hand enemyPlayerModel) {
-        this.ourPlayerModel = ourPlayerModel;
-        this.enemyPlayerModel = enemyPlayerModel;
-    }
+//    public Table(Hand ourPlayerModel, Hand enemyPlayerModel) {
+//        this.ourPlayerModel = ourPlayerModel;
+//        this.enemyPlayerModel = enemyPlayerModel;
+//    }
 
     public Table() {
 

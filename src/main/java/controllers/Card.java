@@ -42,8 +42,6 @@ public class Card {
         else {
             this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
         }
-
-        cardModel.get().getHandModel().getPlayer().setTurn(false);
     }
 
     public Text getColor() {

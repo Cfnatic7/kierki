@@ -12,7 +12,7 @@ public class Player {
 
     private Player oppositePlayer;
 
-    private Hand hand;
+    private Hand hand = new Hand();
 
     private int points;
 

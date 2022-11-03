@@ -22,19 +22,10 @@ public class Table {
     @FXML
     private Text ourPlayerPoints;
 
-    private model.Table tableModel;
-
-    private Hand firstHandController;
-
-    private Hand secondHandController;
-
     public void init() throws IOException, EmptyDeckException {
-        tableModel = new model.Table();
         AnchorPane firstHand = getFirstHand();
 
         AnchorPane secondHand = getSecondHand();
-
-        configurePlayers();
 
         initializeTextNodes();
         table.getChildren().add(firstHand);
@@ -47,32 +38,12 @@ public class Table {
 
     private AnchorPane getSecondHand() throws IOException, EmptyDeckException {
         FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        AnchorPane secondHand = secondHandLoader.load();
-        Player ourPlayerModel = new Player(false, true, true);
-
-        model.Hand secondHandModel = new model.Hand(ourPlayerModel, this.tableModel);
-        ourPlayerModel.setHand(secondHandModel);
-        tableModel.setOurPlayerModel(secondHandModel);
-        secondHandController = secondHandLoader.getController();
-        secondHandController.initModel(secondHandModel);
-        return secondHand;
+        return secondHandLoader.load();
     }
 
     private AnchorPane getFirstHand() throws IOException, EmptyDeckException {
         FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        AnchorPane firstHand = firstHandLoader.load();
-        Player enemyPlayerModel = new Player(true, false, false);
-        model.Hand firstHandModel = new model.Hand(enemyPlayerModel, this.tableModel);
-        enemyPlayerModel.setHand(firstHandModel);
-        tableModel.setOurPlayerModel(firstHandModel);
-        firstHandController = firstHandLoader.getController();
-        firstHandController.initModel(firstHandModel);
-        return firstHand;
-    }
-
-    private void configurePlayers() {
-        firstHandController.getHandModel().getPlayer().setOppositePlayer(secondHandController.getHandModel().getPlayer());
-        secondHandController.getHandModel().getPlayer().setOppositePlayer(firstHandController.getHandModel().getPlayer());
+        return firstHandLoader.load();
     }
 
     private void initializeTextNodes() {

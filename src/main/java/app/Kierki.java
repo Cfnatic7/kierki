@@ -25,6 +25,8 @@ public class Kierki extends Application {
 
     private final static int PORT = 8372;
 
+    private final static int PORT_FOR_ROOM_HANDLER = 7482;
+
     private Hand player;
 
     private Text message = new Text();
@@ -41,6 +43,8 @@ public class Kierki extends Application {
 
     private static Socket clientSocket;
 
+    private static Socket roomHandlerSocket;
+
     public static DataInputStream dataIn;
 
     public static DataOutputStream dataOut;
@@ -48,6 +52,7 @@ public class Kierki extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            roomHandlerSocket = new Socket("127.0.0.1", PORT_FOR_ROOM_HANDLER);
             clientSocket = new Socket("127.0.0.1", PORT);
             dataIn = new DataInputStream(clientSocket.getInputStream());
             dataOut = new DataOutputStream(clientSocket.getOutputStream());
