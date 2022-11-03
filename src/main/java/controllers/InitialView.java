@@ -22,11 +22,11 @@ public class InitialView {
     }
 
     public void registerOnClick(ActionEvent e) throws IOException {
-        FXMLLoader registerLoader = new FXMLLoader(getClass().getResource("/register-form.fxml"));
-        Parent registerLoad = registerLoader.load();
-        LoginForm loginFormController = registerLoader.getController();
+        FXMLLoader registerLoader = new FXMLLoader(getClass().getResource("/registration-form.fxml"));
+        Parent registerForm = registerLoader.load();
+        RegistrationForm registerFormController = registerLoader.getController();
+        registerFormController.initModel();
         Scene scene = Kierki.getScene();
-        Parent registerForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/registration-form.fxml")));
         scene.setRoot(registerForm);
     }
 }
