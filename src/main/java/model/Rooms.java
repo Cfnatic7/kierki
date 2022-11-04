@@ -1,6 +1,13 @@
 package model;
 
+import Exceptions.InternalServerErrorException;
+import app.Kierki;
+import enums.Commands;
+import enums.RoomNumber;
+import enums.ServerResponses;
 import javafx.beans.property.SimpleBooleanProperty;
+
+import java.io.IOException;
 
 public class Rooms {
 
@@ -43,6 +50,19 @@ public class Rooms {
 
     public static SimpleBooleanProperty getIsFourthRoomFree() {
         return isFirstRoomFree;
+    }
+
+    public static void handleRoomJoin(RoomNumber roomNumber) throws IOException, InternalServerErrorException {
+        Kierki.dataOut.writeUTF(Commands.JOIN_ROOM.name());
+        String response = Kierki.dataIn.readUTF();
+        if (!response.equals(ServerResponses.OK.name())) {
+            throw new InternalServerErrorException();
+        }
+        Kierki.dataOut.writeUTF(roomNumber.name());
+        response = Kierki.dataIn.readUTF();
+        if (!response.equals(ServerResponses.OK.name())) {
+            throw new InternalServerErrorException();
+        }
     }
 
 }

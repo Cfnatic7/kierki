@@ -1,7 +1,10 @@
 package controllers;
 
 import Exceptions.EmptyDeckException;
+import Exceptions.InternalServerErrorException;
 import app.Kierki;
+import enums.RoomNumber;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -28,7 +31,7 @@ public class Rooms {
     @FXML
     public Button fourthRoom;
 
-    private final Background defaultButtonBg = firstRoom.getBackground();
+    private Background defaultButtonBg;
 
     private final BackgroundFill background_fill = new BackgroundFill(Color.GRAY,
             CornerRadii.EMPTY, Insets.EMPTY);
@@ -37,6 +40,7 @@ public class Rooms {
 
     private void startListening() {
         model.Rooms.getIsFirstRoomFree().addListener((observableValue, oldValue, newValue) -> {
+            System.out.println("room listener debug");
             if (!newValue) {
                 firstRoom.setBackground(unactiveButtonBg);
             }
@@ -46,6 +50,7 @@ public class Rooms {
         });
 
         model.Rooms.getIsSecondRoomFree().addListener((observableValue, oldValue, newValue) -> {
+            System.out.println("room listener debug");
             if (!newValue) {
                 firstRoom.setBackground(unactiveButtonBg);
             }
@@ -55,6 +60,7 @@ public class Rooms {
         });
 
         model.Rooms.getIsThirdRoomFree().addListener((observableValue, oldValue, newValue) -> {
+            System.out.println("room listener debug");
             if (!newValue) {
                 firstRoom.setBackground(unactiveButtonBg);
             }
@@ -64,6 +70,7 @@ public class Rooms {
         });
 
         model.Rooms.getIsFourthRoomFree().addListener((observableValue, oldValue, newValue) -> {
+            System.out.println("room listener debug");
             if (!newValue) {
                 firstRoom.setBackground(unactiveButtonBg);
             }
@@ -75,15 +82,43 @@ public class Rooms {
 
     @FXML
     public void initialize() {
+        defaultButtonBg = firstRoom.getBackground();
         startListening();
     }
 
-    public void onChooseRoom() throws IOException, EmptyDeckException {
+    public void onChooseRoom(ActionEvent e) throws IOException, EmptyDeckException {
+        var target = e.getTarget();
+        if (!(target instanceof Button)) return;
+        RoomNumber roomNumber = getRoomNumber((Button) target);
+        try {
+            model.Rooms.handleRoomJoin(roomNumber);
+        } catch(InternalServerErrorException ex) {
+            System.out.println("Can't join room");
+        }
+
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/table.fxml"));
         AnchorPane table = tableLoader.load();
         Table tableController = tableLoader.getController();
         tableController.init();
         Kierki.getScene().setRoot(table);
+    }
+
+    private RoomNumber getRoomNumber(Button target) {
+        RoomNumber roomNumber = null;
+        Button button = target;
+        if (button.getText().equals("pokój 1")) {
+            roomNumber = RoomNumber.ONE;
+        }
+        else if (button.getText().equals("pokój 2")) {
+            roomNumber = RoomNumber.TWO;
+        }
+        else if (button.getText().equals("pokój 3")) {
+            roomNumber = RoomNumber.THREE;
+        }
+        else if (button.getText().equals("pokój 4")) {
+            roomNumber = RoomNumber.FOUR;
+        }
+        return roomNumber;
     }
 
 }
