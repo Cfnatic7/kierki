@@ -1,8 +1,11 @@
 package handlers;
 
 import app.Kierki;
+import controllers.Rooms;
 import enums.RoomNumber;
 import enums.ServerResponses;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -39,19 +42,55 @@ public class RoomHandler extends Thread {
 
     private void handleRoomNumberResponse(RoomNumber roomNumber, ServerResponses serverResponse) {
         if (roomNumber == RoomNumber.ONE) {
-            model.Rooms.setIsFirstRoomFree(serverResponse != ServerResponses.ROOM_FULL);
+            Platform.runLater(() -> {
+                FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
+                try {
+                    roomLoader.load();
+                    Rooms rooms = roomLoader.getController();
+                    rooms.firstRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.TWO) {
-            model.Rooms.setIsSecondRoomFree(serverResponse != ServerResponses.ROOM_FULL);
+            Platform.runLater(() -> {
+                FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
+                try {
+                    roomLoader.load();
+                    Rooms rooms = roomLoader.getController();
+                    rooms.secondRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.THREE) {
-            model.Rooms.setIsThirdRoomFree(serverResponse != ServerResponses.ROOM_FULL);
+            Platform.runLater(() -> {
+                FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
+                try {
+                    roomLoader.load();
+                    Rooms rooms = roomLoader.getController();
+                    rooms.thirdRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.FOUR) {
-            model.Rooms.setIsFourthRoomFree(serverResponse != ServerResponses.ROOM_FULL);
+            Platform.runLater(() -> {
+                FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
+                try {
+                    roomLoader.load();
+                    Rooms rooms = roomLoader.getController();
+                    rooms.fourthRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
     }

@@ -38,52 +38,9 @@ public class Rooms {
 
     private final Background unactiveButtonBg = new Background(background_fill);
 
-    private void startListening() {
-        model.Rooms.getIsFirstRoomFree().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println("room listener debug");
-            if (!newValue) {
-                firstRoom.setBackground(unactiveButtonBg);
-            }
-            else {
-                firstRoom.setBackground(defaultButtonBg);
-            }
-        });
-
-        model.Rooms.getIsSecondRoomFree().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println("room listener debug");
-            if (!newValue) {
-                firstRoom.setBackground(unactiveButtonBg);
-            }
-            else {
-                firstRoom.setBackground(defaultButtonBg);
-            }
-        });
-
-        model.Rooms.getIsThirdRoomFree().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println("room listener debug");
-            if (!newValue) {
-                firstRoom.setBackground(unactiveButtonBg);
-            }
-            else {
-                firstRoom.setBackground(defaultButtonBg);
-            }
-        });
-
-        model.Rooms.getIsFourthRoomFree().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println("room listener debug");
-            if (!newValue) {
-                firstRoom.setBackground(unactiveButtonBg);
-            }
-            else {
-                firstRoom.setBackground(defaultButtonBg);
-            }
-        });
-    }
-
     @FXML
     public void initialize() {
         defaultButtonBg = firstRoom.getBackground();
-        startListening();
     }
 
     public void onChooseRoom(ActionEvent e) throws IOException, EmptyDeckException {
