@@ -11,15 +11,10 @@ import java.net.Socket;
 
 public class RoomHandler extends Thread {
 
-    private final DataInputStream dataIn;
-
-    private DataOutputStream dataOut;
 
     private boolean isRunning = true;
 
-    public RoomHandler(Socket roomSocket) throws IOException {
-        dataIn = new DataInputStream(roomSocket.getInputStream());
-        dataOut = new DataOutputStream(roomSocket.getOutputStream());
+    public RoomHandler(Socket roomSocket) {
     }
 
     @Override
@@ -29,10 +24,10 @@ public class RoomHandler extends Thread {
         while (isRunning) {
             try {
                 System.out.println("Waiting for server notification");
-                response = dataIn.readUTF();
+                response = Kierki.roomDataIn.readUTF();
                 System.out.println("Received response");
                 RoomNumber roomNumber = RoomNumber.valueOf(response);
-                response = dataIn.readUTF();
+                response = Kierki.roomDataIn.readUTF();
                 ServerResponses serverResponse = ServerResponses.valueOf(response);
                 handleRoomNumberResponse(roomNumber, serverResponse);
             } catch (IOException e) {

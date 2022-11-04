@@ -52,10 +52,16 @@ public class Kierki extends Application {
 
     public static DataOutputStream dataOut;
 
+    public static DataInputStream roomDataIn;
+
+    public static DataOutputStream roomDataOut;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
             roomHandlerSocket = new Socket("127.0.0.1", PORT_FOR_ROOM_HANDLER);
+            roomDataIn = new DataInputStream(roomHandlerSocket.getInputStream());
+            roomDataOut = new DataOutputStream(roomHandlerSocket.getOutputStream());
             roomHandler = new RoomHandler(roomHandlerSocket);
             clientSocket = new Socket("127.0.0.1", PORT);
             dataIn = new DataInputStream(clientSocket.getInputStream());
@@ -73,7 +79,14 @@ public class Kierki extends Application {
         primaryStage.setOnCloseRequest((ae) -> {
             Platform.exit();
             roomHandler.kill();
-            roomHandler.stop();
+            try {
+                roomDataOut.close();
+                roomDataIn.close();
+                dataOut.close();
+                dataIn.close();
+            } catch(Exception e) {
+                System.out.println("Can't close socket streams");
+            }
             try {
                 roomHandler.join();
             } catch (InterruptedException e) {
