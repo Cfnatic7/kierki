@@ -70,4 +70,9 @@ public class Rooms {
         System.out.println("Joined room " + roomNumber.name());
     }
 
+    public static void handleLeaveRoom() throws IOException {
+        Kierki.dataOut.writeUTF(Commands.LEAVE_ROOM.name());
+        String response = Kierki.dataIn.readUTF();
+    }
+
 }

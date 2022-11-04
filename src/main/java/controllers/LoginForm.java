@@ -25,6 +25,7 @@ public class LoginForm {
             Scene scene = Kierki.getScene();
             FXMLLoader roomLoader = new FXMLLoader(getClass().getResource("/rooms.fxml"));
             scene.setRoot(roomLoader.load());
+            Kierki.setRoomsController(roomLoader.getController());
             System.out.println("Successfully logged in");
         } catch (BadRequestException ex) {
             System.out.println("Can't login");

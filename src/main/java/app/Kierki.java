@@ -1,5 +1,7 @@
 package app;
 
+import controllers.Rooms;
+import enums.RoomNumber;
 import handlers.RoomHandler;
 import model.Deck;
 import model.Hand;
@@ -47,6 +49,8 @@ public class Kierki extends Application {
 
     private static Socket roomHandlerSocket;
 
+    private static Rooms roomsController;
+
     private static RoomHandler roomHandler;
 
     public static DataInputStream dataIn;
@@ -80,6 +84,7 @@ public class Kierki extends Application {
         primaryStage.setOnCloseRequest((ae) -> {
             try {
                 model.LoginForm.handleLogout();
+                model.Rooms.handleLeaveRoom();
             } catch (IOException e) {
                 System.out.println("Can't logout");
             }
@@ -113,5 +118,13 @@ public class Kierki extends Application {
 
     public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public static void setRoomsController(Rooms rs) {
+        roomsController = rs;
+    }
+
+    public static Rooms getRoomsController() {
+        return roomsController;
     }
 }
