@@ -1,5 +1,6 @@
 package app;
 
+import handlers.RoomHandler;
 import model.Deck;
 import model.Hand;
 import javafx.application.Application;
@@ -45,26 +46,38 @@ public class Kierki extends Application {
 
     private static Socket roomHandlerSocket;
 
+    private static RoomHandler roomHandler;
+
     public static DataInputStream dataIn;
 
     public static DataOutputStream dataOut;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         try {
             roomHandlerSocket = new Socket("127.0.0.1", PORT_FOR_ROOM_HANDLER);
+            roomHandler = new RoomHandler(roomHandlerSocket);
             clientSocket = new Socket("127.0.0.1", PORT);
             dataIn = new DataInputStream(clientSocket.getInputStream());
             dataOut = new DataOutputStream(clientSocket.getOutputStream());
             Kierki.primaryStage = primaryStage;
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/initial-view.fxml")));
             scene = new Scene(root);
+            roomHandler.start();
         } catch(Exception e) {
+            roomHandler.kill();
+            roomHandler.join();
             e.printStackTrace();
         }
         Platform.setImplicitExit(true);
         primaryStage.setOnCloseRequest((ae) -> {
             Platform.exit();
+            roomHandler.kill();
+            try {
+                roomHandler.join();
+            } catch (InterruptedException e) {
+                System.out.println("Can't join room handler thread");
+            }
             System.exit(EXIT_SUCCESS);
         });
         primaryStage.setScene(scene);

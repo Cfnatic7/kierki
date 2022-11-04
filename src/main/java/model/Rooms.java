@@ -64,6 +64,7 @@ public class Rooms {
         if (!response.equals(ServerResponses.OK.name())) {
             throw new BadRequestException("Can't join room");
         }
+        System.out.println("Joined room " + roomNumber.name());
     }
 
 }

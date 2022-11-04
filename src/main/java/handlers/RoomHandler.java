@@ -25,10 +25,11 @@ public class RoomHandler extends Thread {
     @Override
     public void run() {
         String response;
+        System.out.println("Entered room handler");
         while (isRunning) {
             try {
                 response = dataIn.readUTF();
-                System.out.println("Receiver response");
+                System.out.println("Received response");
                 RoomNumber roomNumber = RoomNumber.valueOf(response);
                 response = dataIn.readUTF();
                 ServerResponses serverResponse = ServerResponses.valueOf(response);
@@ -43,19 +44,19 @@ public class RoomHandler extends Thread {
     private void handleRoomNumberResponse(RoomNumber roomNumber, ServerResponses serverResponse) {
         if (roomNumber == RoomNumber.ONE) {
             model.Rooms.setIsFirstRoomFree(serverResponse != ServerResponses.ROOM_FULL);
-            System.out.println("Handle set room 1 busy state");
+            System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.TWO) {
             model.Rooms.setIsSecondRoomFree(serverResponse != ServerResponses.ROOM_FULL);
-            System.out.println("Handle set room 2 busy state");
+            System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.THREE) {
             model.Rooms.setIsThirdRoomFree(serverResponse != ServerResponses.ROOM_FULL);
-            System.out.println("Handle set room 3 busy state");
+            System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.FOUR) {
             model.Rooms.setIsFourthRoomFree(serverResponse != ServerResponses.ROOM_FULL);
-            System.out.println("Handle set room 4 busy state");
+            System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
     }
 
