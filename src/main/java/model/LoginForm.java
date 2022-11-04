@@ -13,18 +13,23 @@ public class LoginForm {
         Kierki.dataOut.writeUTF(Commands.LOGIN.name());
         String response = Kierki.dataIn.readUTF();
         if (!response.equals(ServerResponses.OK.name())) {
-            throw new BadRequestException("Server didn't respond");
+            throw new BadRequestException("Can't login");
         }
         Kierki.dataOut.writeUTF(login);
         response = Kierki.dataIn.readUTF();
         if (!response.equals(ServerResponses.OK.name())) {
-            throw new BadRequestException("Server didn't respond");
+            throw new BadRequestException("Can't login");
         }
         Kierki.dataOut.writeUTF(password);
         response = Kierki.dataIn.readUTF();
         if (!response.equals(ServerResponses.OK.name())) {
             throw new BadRequestException("Wrong login");
         }
+    }
+
+    public static void handleLogout() throws IOException {
+        Kierki.dataOut.writeUTF(Commands.LOGOUT.name());
+        String response = Kierki.dataIn.readUTF();
     }
 
 }

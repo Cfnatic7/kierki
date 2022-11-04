@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.Objects;
 
@@ -77,6 +78,11 @@ public class Kierki extends Application {
         }
         Platform.setImplicitExit(true);
         primaryStage.setOnCloseRequest((ae) -> {
+            try {
+                model.LoginForm.handleLogout();
+            } catch (IOException e) {
+                System.out.println("Can't logout");
+            }
             Platform.exit();
             roomHandler.kill();
             try {

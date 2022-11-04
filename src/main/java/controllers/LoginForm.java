@@ -18,8 +18,6 @@ public class LoginForm {
     @FXML
     private TextField passwordTextField;
 
-    private model.LoginForm loginFormModel;
-
 
     public void onLogin(ActionEvent e) throws IOException {
         try {
@@ -29,7 +27,7 @@ public class LoginForm {
             scene.setRoot(roomLoader.load());
             System.out.println("Successfully logged in");
         } catch (BadRequestException ex) {
-            throw new RuntimeException(ex);
+            System.out.println("Can't login");
         }
 
     }
@@ -40,9 +38,5 @@ public class LoginForm {
 
     public TextField getPasswordTextField() {
         return passwordTextField;
-    }
-
-    public model.LoginForm getLoginFormModel() {
-        return loginFormModel;
     }
 }

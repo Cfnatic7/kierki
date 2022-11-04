@@ -5,4 +5,5 @@ public enum Commands {
     REGISTER,
     JOIN_ROOM,
     LEAVE_ROOM,
+    LOGOUT,
 }
