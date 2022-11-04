@@ -2,7 +2,6 @@ package controllers;
 
 import Exceptions.BadRequestException;
 import Exceptions.EmptyDeckException;
-import Exceptions.InternalServerErrorException;
 import app.Kierki;
 import enums.RoomNumber;
 import javafx.event.ActionEvent;
@@ -91,10 +90,12 @@ public class Rooms {
         var target = e.getTarget();
         if (!(target instanceof Button)) return;
         RoomNumber roomNumber = getRoomNumber((Button) target);
+        System.out.println("button text: " + ((Button) target).getText());
         try {
             model.Rooms.handleRoomJoin(roomNumber);
         } catch(BadRequestException ex) {
             System.out.println("Can't join room");
+            return;
         }
 
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("/table.fxml"));

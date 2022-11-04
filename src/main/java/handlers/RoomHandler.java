@@ -11,11 +11,11 @@ import java.net.Socket;
 
 public class RoomHandler extends Thread {
 
-    private DataInputStream dataIn;
+    private final DataInputStream dataIn;
 
     private DataOutputStream dataOut;
 
-    private boolean isRunning = false;
+    private boolean isRunning = true;
 
     public RoomHandler(Socket roomSocket) throws IOException {
         dataIn = new DataInputStream(roomSocket.getInputStream());
@@ -28,6 +28,7 @@ public class RoomHandler extends Thread {
         System.out.println("Entered room handler");
         while (isRunning) {
             try {
+                System.out.println("Waiting for server notification");
                 response = dataIn.readUTF();
                 System.out.println("Received response");
                 RoomNumber roomNumber = RoomNumber.valueOf(response);

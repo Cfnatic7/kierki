@@ -73,6 +73,7 @@ public class Kierki extends Application {
         primaryStage.setOnCloseRequest((ae) -> {
             Platform.exit();
             roomHandler.kill();
+            roomHandler.stop();
             try {
                 roomHandler.join();
             } catch (InterruptedException e) {

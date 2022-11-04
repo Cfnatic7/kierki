@@ -56,11 +56,14 @@ public class Rooms {
     public static void handleRoomJoin(RoomNumber roomNumber) throws IOException, BadRequestException {
         Kierki.dataOut.writeUTF(Commands.JOIN_ROOM.name());
         String response = Kierki.dataIn.readUTF();
+        System.out.println("First response in handle room join: " + response);
+
         if (!response.equals(ServerResponses.OK.name())) {
             throw new BadRequestException("Can't join room");
         }
         Kierki.dataOut.writeUTF(roomNumber.name());
         response = Kierki.dataIn.readUTF();
+        System.out.println("Second response in handle room join: " + response);
         if (!response.equals(ServerResponses.OK.name())) {
             throw new BadRequestException("Can't join room");
         }
