@@ -1,5 +1,6 @@
 package controllers;
 
+import Exceptions.BadRequestException;
 import Exceptions.EmptyDeckException;
 import Exceptions.InternalServerErrorException;
 import app.Kierki;
@@ -92,7 +93,7 @@ public class Rooms {
         RoomNumber roomNumber = getRoomNumber((Button) target);
         try {
             model.Rooms.handleRoomJoin(roomNumber);
-        } catch(InternalServerErrorException ex) {
+        } catch(BadRequestException ex) {
             System.out.println("Can't join room");
         }
 

@@ -1,5 +1,6 @@
 package model;
 
+import Exceptions.BadRequestException;
 import Exceptions.InternalServerErrorException;
 import app.Kierki;
 import enums.Commands;
@@ -20,19 +21,19 @@ public class Rooms {
     private static final SimpleBooleanProperty isFourthRoomFree = new SimpleBooleanProperty(true);
 
 
-    public synchronized void setIsFirstRoomFree(boolean value) {
+    public static synchronized void setIsFirstRoomFree(boolean value) {
         isFirstRoomFree.setValue(value);
     }
 
-    public synchronized void setIsSecondRoomFree(boolean value) {
+    public static synchronized void setIsSecondRoomFree(boolean value) {
         isSecondRoomFree.setValue(value);
     }
 
-    public synchronized void setIsThirdRoomFree(boolean value) {
+    public static synchronized void setIsThirdRoomFree(boolean value) {
         isThirdRoomFree.setValue(value);
     }
 
-    public synchronized void setIsFourthRoomFree(boolean value) {
+    public static synchronized void setIsFourthRoomFree(boolean value) {
         isFourthRoomFree.setValue(value);
     }
 
@@ -52,16 +53,16 @@ public class Rooms {
         return isFirstRoomFree;
     }
 
-    public static void handleRoomJoin(RoomNumber roomNumber) throws IOException, InternalServerErrorException {
+    public static void handleRoomJoin(RoomNumber roomNumber) throws IOException, BadRequestException {
         Kierki.dataOut.writeUTF(Commands.JOIN_ROOM.name());
         String response = Kierki.dataIn.readUTF();
         if (!response.equals(ServerResponses.OK.name())) {
-            throw new InternalServerErrorException();
+            throw new BadRequestException("Can't join room");
         }
         Kierki.dataOut.writeUTF(roomNumber.name());
         response = Kierki.dataIn.readUTF();
         if (!response.equals(ServerResponses.OK.name())) {
-            throw new InternalServerErrorException();
+            throw new BadRequestException("Can't join room");
         }
     }
 
