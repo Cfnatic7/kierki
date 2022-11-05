@@ -1,6 +1,7 @@
 package handlers;
 
 import app.Kierki;
+import enums.Commands;
 import enums.Rank;
 import enums.Suit;
 import javafx.application.Platform;
@@ -27,16 +28,19 @@ public class EnemyCardHandler extends Thread {
     public void run() {
         while(isRunning) {
             try {
-                Suit suit = Suit.valueOf(receiveEnemyCardDataIn.readUTF());
-                Rank rank = Rank.valueOf(receiveEnemyCardDataIn.readUTF());
-                System.out.println("Card receiver");
-                Platform.runLater(() -> {
-                    try {
-                        Kierki.getEnemyhandController().renderSingleCard(new Card(rank, suit));
-                    } catch(Exception e) {
-                        System.out.println("Couldn't render card");
-                    }
-                });
+                Commands command = Commands.valueOf(receiveEnemyCardDataIn.readUTF());
+                if (command == Commands.SEND_ENEMY_CARD) {
+                    Suit suit = Suit.valueOf(receiveEnemyCardDataIn.readUTF());
+                    Rank rank = Rank.valueOf(receiveEnemyCardDataIn.readUTF());
+                    System.out.println("Card received");
+                    Platform.runLater(() -> {
+                        try {
+                            Kierki.getEnemyhandController().renderSingleCard(new Card(rank, suit));
+                        } catch(Exception e) {
+                            System.out.println("Couldn't render card");
+                        }
+                    });
+                }
             } catch (IOException e) {
                 System.out.println("Socket closed");
             }

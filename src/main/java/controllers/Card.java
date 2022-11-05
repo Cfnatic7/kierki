@@ -33,11 +33,15 @@ public class Card {
     }
 
     public void onClick() {
-
-        AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
-        var cards = handPane.getChildren();
-        cards.forEach(card -> card.setLayoutY(initialYLayout));
-        this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
+        try {
+            this.cardModel.sendCardToServer();
+            AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
+            var cards = handPane.getChildren();
+            cards.forEach(card -> card.setLayoutY(initialYLayout));
+            this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
+        } catch (Exception e) {
+            System.out.println("Card couldn't be send");
+        }
     }
 
     public Text getColor() {
