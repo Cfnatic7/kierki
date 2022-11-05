@@ -4,6 +4,7 @@ import controllers.Rooms;
 import enums.RoomNumber;
 import handlers.EnemyCardHandler;
 import handlers.RoomHandler;
+import javafx.scene.layout.AnchorPane;
 import model.Deck;
 import model.Hand;
 import javafx.application.Application;
@@ -66,9 +67,11 @@ public class Kierki extends Application {
 
     public static DataOutputStream roomDataOut;
 
-    private static controllers.Hand enemyhandController;
+//    private static controllers.Hand enemyhandController;
 
     private static EnemyCardHandler enemyCardHandler;
+
+    private static AnchorPane enemyHandPane;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -143,11 +146,20 @@ public class Kierki extends Application {
         return roomsController;
     }
 
-    public static controllers.Hand getEnemyhandController() {
-        return enemyhandController;
+//    public static controllers.Hand getEnemyhandController() {
+//        return enemyhandController;
+//    }
+//
+//    public static void setEnemyhandController(controllers.Hand enemyhandController) {
+//        Kierki.enemyhandController = enemyhandController;
+//    }
+
+    public static AnchorPane getEnemyHandPane() {
+        return enemyHandPane;
     }
 
-    public static void setEnemyhandController(controllers.Hand enemyhandController) {
-        Kierki.enemyhandController = enemyhandController;
+    public static void setEnemyHandPane(AnchorPane enemyHandPane) {
+        Kierki.enemyHandPane = enemyHandPane;
     }
+
 }

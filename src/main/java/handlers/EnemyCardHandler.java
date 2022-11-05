@@ -1,11 +1,13 @@
 package handlers;
 
 import app.Kierki;
+import controllers.Card;
 import enums.Commands;
 import enums.Rank;
 import enums.Suit;
 import javafx.application.Platform;
-import model.Card;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class EnemyCardHandler extends Thread {
                     System.out.println("Card received");
                     Platform.runLater(() -> {
                         try {
-                            Kierki.getEnemyhandController().renderSingleCard(new Card(rank, suit));
+                            addCardToEnemyHandView(suit, rank);
                         } catch(Exception e) {
                             System.out.println("Couldn't render card");
                         }
@@ -45,6 +47,16 @@ public class EnemyCardHandler extends Thread {
                 System.out.println("Socket closed");
             }
         }
+    }
+
+    private void addCardToEnemyHandView(Suit suit, Rank rank) throws IOException {
+        FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/card.fxml"));
+        AnchorPane card = cardLoader.load();
+        Card cardController = cardLoader.getController();
+        cardController.initModel(new model.Card(rank, suit));
+        AnchorPane enemyHandView = Kierki.getEnemyHandPane();
+        enemyHandView.getChildren().clear();
+        enemyHandView.getChildren().add(card);
     }
 
     public void kill() {

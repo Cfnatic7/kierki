@@ -34,6 +34,7 @@ public class Card {
 
     public void onClick() {
         try {
+            System.out.println("Tryind to send card");
             this.cardModel.sendCardToServer();
             AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
             var cards = handPane.getChildren();
