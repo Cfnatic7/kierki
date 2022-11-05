@@ -3,6 +3,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane fx:id="cardsInPossesion" prefHeight="250.0" prefWidth="1200.0" style="-fx-border-color: yellow; -fx-border-width: 10px; -fx-border-radius: 10px; -fx-background-color: darkslategrey;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Hand">
+<AnchorPane fx:id="handPane" prefHeight="250.0" prefWidth="1200.0" style="-fx-border-color: yellow; -fx-border-width: 10px; -fx-border-radius: 10px; -fx-background-color: darkslategrey;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Hand">
 
 </AnchorPane>

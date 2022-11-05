@@ -52,6 +52,7 @@ public class Table {
         FXMLLoader enemyHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane enemyHandView = enemyHandLoader.load();
         enemyHardController = enemyHandLoader.getController();
+        Kierki.setEnemyhandController(enemyHardController);
         return enemyHandView;
     }
 

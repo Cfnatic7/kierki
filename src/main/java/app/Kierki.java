@@ -2,6 +2,7 @@ package app;
 
 import controllers.Rooms;
 import enums.RoomNumber;
+import handlers.EnemyCardHandler;
 import handlers.RoomHandler;
 import model.Deck;
 import model.Hand;
@@ -31,6 +32,8 @@ public class Kierki extends Application {
 
     private final static int PORT_FOR_ROOM_HANDLER = 7482;
 
+    private final static int PORT_FOR_ENEMY_CARD = 7583;
+
     private Hand player;
 
     private Text message = new Text();
@@ -49,6 +52,8 @@ public class Kierki extends Application {
 
     private static Socket roomHandlerSocket;
 
+    private static Socket receiveEnemyCardSocket;
+
     private static Rooms roomsController;
 
     private static RoomHandler roomHandler;
@@ -61,13 +66,19 @@ public class Kierki extends Application {
 
     public static DataOutputStream roomDataOut;
 
+    private static controllers.Hand enemyhandController;
+
+    private static EnemyCardHandler enemyCardHandler;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
             roomHandlerSocket = new Socket("127.0.0.1", PORT_FOR_ROOM_HANDLER);
+            receiveEnemyCardSocket = new Socket("127.0.0.1", PORT_FOR_ENEMY_CARD);
             roomDataIn = new DataInputStream(roomHandlerSocket.getInputStream());
             roomDataOut = new DataOutputStream(roomHandlerSocket.getOutputStream());
             roomHandler = new RoomHandler(roomHandlerSocket);
+            enemyCardHandler = new EnemyCardHandler(receiveEnemyCardSocket);
             clientSocket = new Socket("127.0.0.1", PORT);
             dataIn = new DataInputStream(clientSocket.getInputStream());
             dataOut = new DataOutputStream(clientSocket.getOutputStream());
@@ -75,9 +86,12 @@ public class Kierki extends Application {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/initial-view.fxml")));
             scene = new Scene(root);
             roomHandler.start();
+            enemyCardHandler.start();
         } catch(Exception e) {
             roomHandler.kill();
             roomHandler.join();
+            enemyCardHandler.kill();
+            enemyCardHandler.join();
             e.printStackTrace();
         }
         Platform.setImplicitExit(true);
@@ -89,6 +103,7 @@ public class Kierki extends Application {
             }
             Platform.exit();
             roomHandler.kill();
+            enemyCardHandler.kill();
             try {
                 roomDataOut.close();
                 roomDataIn.close();
@@ -99,6 +114,7 @@ public class Kierki extends Application {
             }
             try {
                 roomHandler.join();
+                enemyCardHandler.join();
             } catch (InterruptedException e) {
                 System.out.println("Can't join room handler thread");
             }
@@ -125,5 +141,13 @@ public class Kierki extends Application {
 
     public static Rooms getRoomsController() {
         return roomsController;
+    }
+
+    public static controllers.Hand getEnemyhandController() {
+        return enemyhandController;
+    }
+
+    public static void setEnemyhandController(controllers.Hand enemyhandController) {
+        Kierki.enemyhandController = enemyhandController;
     }
 }

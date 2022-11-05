@@ -1,17 +1,33 @@
 package controllers;
 
-import Exceptions.EmptyDeckException;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class Hand {
-    public AnchorPane cardsInPossesion;
+
+    @FXML
+    private AnchorPane handPane;
 
     public void sendRequestForCards() throws IOException {
         model.Table.getOurPlayerModel().getHand().requestCards();
+    }
+
+    public void clearHandPane() {
+        handPane.getChildren().clear();
+    }
+
+    public void renderSingleCard(model.Card card) throws IOException {
+        FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/card.fxml"));
+        AnchorPane cardPane = cardLoader.load();
+        Card cardController = cardLoader.getController();
+        cardController.initModel(new SimpleObjectProperty<>(card));
+        cardPane.setLayoutX(cardPane.getLayoutX() + (handPane.getWidth() / 2) - (cardPane.getWidth() / 2));
+        cardPane.setLayoutY(cardPane.getLayoutY() + 75);
+        System.out.println("Card rendered");
     }
 
     public void renderAllCards() throws IOException {
@@ -27,7 +43,7 @@ public class Hand {
             cardController.setInitialYLayout(cardPane.getLayoutY());
 
             xOffset += 40;
-            cardsInPossesion.getChildren().add(cardPane);
+            handPane.getChildren().add(cardPane);
         }
     }
 
