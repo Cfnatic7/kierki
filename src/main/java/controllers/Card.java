@@ -17,15 +17,15 @@ public class Card {
 
     private double initialYLayout;
 
-    private SimpleObjectProperty<model.Card> cardModel = null;
+    private model.Card cardModel = null;
 
-    public void initModel(SimpleObjectProperty<model.Card> cardModel) {
+    public void initModel(model.Card cardModel) {
 //        if (cardModel != null) {
 //            throw new IllegalStateException("Model can only be initialized once");
 //        }
         this.cardModel = cardModel;
-        this.setColor(this.cardModel.get().suit.toString());
-        this.setValue(this.cardModel.get().rank.toString());
+        this.setColor(this.cardModel.suit.toString());
+        this.setValue(this.cardModel.rank.toString());
     }
 
     public void onHover() {
@@ -37,12 +37,7 @@ public class Card {
         AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
         var cards = handPane.getChildren();
         cards.forEach(card -> card.setLayoutY(initialYLayout));
-        if (this.cardModel.get().isOpponent) {
-            this.cardPane.setLayoutY(this.cardPane.getLayoutY() + 50);
-        }
-        else {
-            this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
-        }
+        this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
     }
 
     public Text getColor() {

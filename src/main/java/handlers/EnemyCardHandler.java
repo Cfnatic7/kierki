@@ -32,7 +32,6 @@ public class EnemyCardHandler extends Thread {
                 System.out.println("Card receiver");
                 Platform.runLater(() -> {
                     try {
-                        Kierki.getEnemyhandController().clearHandPane();
                         Kierki.getEnemyhandController().renderSingleCard(new Card(rank, suit));
                     } catch(Exception e) {
                         System.out.println("Couldn't render card");

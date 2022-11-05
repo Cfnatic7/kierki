@@ -13,23 +13,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hand {
 
-    private final ObservableList<SimpleObjectProperty<Card>> cards;
+    private final List<Card> cards;
 
     private final static int HALF_THE_DECK = 26;
 
 
     public Hand() {
-        cards = FXCollections.observableArrayList();
+        cards = new ArrayList<>();
     }
 
     public void drawCardsFromDeck() throws EmptyDeckException {
         for (int i = 0; i < HALF_THE_DECK; i++) {
             Card card = Deck.drawCard();
             card.setHandModel(this);
-            cards.add(new SimpleObjectProperty<>(card));
+            cards.add(card);
         }
         if (Deck.getCards().isEmpty()) Deck.refill();
     }
@@ -47,7 +49,7 @@ public class Hand {
         for (int i = 0; i < Deck.HALF_THE_DECK; i++) {
             Suit suit = Suit.valueOf(Kierki.dataIn.readUTF());
             Rank rank = Rank.valueOf(Kierki.dataIn.readUTF());
-            cards.add(new SimpleObjectProperty<>(new Card(rank, suit)));
+            cards.add(new Card(rank, suit));
         }
         Kierki.dataIn.readUTF();
     }
@@ -56,7 +58,7 @@ public class Hand {
         cards.clear();
     }
 
-    public ObservableList<SimpleObjectProperty<Card>> getCards() {
+    public List<Card> getCards() {
         return this.cards;
     }
 }
