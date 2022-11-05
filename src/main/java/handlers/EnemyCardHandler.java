@@ -39,12 +39,17 @@ public class EnemyCardHandler extends Thread {
                     }
                 });
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.out.println("Socket closed");
             }
         }
     }
 
     public void kill() {
+        try {
+            receiveEnemyCardSocket.close();
+        } catch(Exception e) {
+            System.out.println("Can't close socket");
+        }
         this.isRunning = false;
     }
 }

@@ -33,6 +33,7 @@ public class Card {
     }
 
     public void onClick() {
+
         AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
         var cards = handPane.getChildren();
         cards.forEach(card -> card.setLayoutY(initialYLayout));

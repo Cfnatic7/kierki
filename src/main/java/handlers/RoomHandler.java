@@ -40,28 +40,37 @@ public class RoomHandler extends Thread {
         if (roomNumber == RoomNumber.ONE) {
             Platform.runLater(() -> {
                 Rooms rooms = Kierki.getRoomsController();
-                rooms.firstRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                if (rooms != null) {
+                    rooms.firstRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                }
+
             });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.TWO) {
             Platform.runLater(() -> {
                 Rooms rooms = Kierki.getRoomsController();
-                rooms.secondRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                if (rooms != null) {
+                    rooms.secondRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                }
             });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.THREE) {
             Platform.runLater(() -> {
                 Rooms rooms = Kierki.getRoomsController();
-                rooms.thirdRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                if (rooms != null) {
+                    rooms.thirdRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                }
             });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
         else if (roomNumber == RoomNumber.FOUR) {
             Platform.runLater(() -> {
                 Rooms rooms = Kierki.getRoomsController();
-                rooms.fourthRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                if (rooms != null) {
+                    rooms.fourthRoom.setDisable(serverResponse == ServerResponses.ROOM_FULL);
+                }
             });
             System.out.println("Set room " + roomNumber.name() + " to " + serverResponse.name() + " state");
         }
