@@ -2,9 +2,17 @@ package model;
 
 import Exceptions.CardNotFoundException;
 import Exceptions.EmptyDeckException;
+import Exceptions.InternalServerErrorException;
+import app.Kierki;
+import enums.Commands;
+import enums.Rank;
+import enums.ServerResponses;
+import enums.Suit;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.IOException;
 
 public class Hand {
 
@@ -31,6 +39,17 @@ public class Hand {
         if (index == -1) throw new CardNotFoundException();
         cards.remove(index);
         return card;
+    }
+
+    public void requestCards() throws IOException {
+        Kierki.dataOut.writeUTF(Commands.GET_HAND.name());
+        Kierki.dataIn.readUTF();
+        for (int i = 0; i < Deck.HALF_THE_DECK; i++) {
+            Suit suit = Suit.valueOf(Kierki.dataIn.readUTF());
+            Rank rank = Rank.valueOf(Kierki.dataIn.readUTF());
+            cards.add(new SimpleObjectProperty<>(new Card(rank, suit)));
+        }
+        Kierki.dataIn.readUTF();
     }
 
     public void reset() {

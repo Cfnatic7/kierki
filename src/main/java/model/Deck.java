@@ -1,6 +1,5 @@
 package model;
 
-import Exceptions.CardNotFoundException;
 import Exceptions.EmptyDeckException;
 import enums.Rank;
 import enums.Suit;
@@ -10,6 +9,8 @@ import java.util.*;
 public class Deck {
 
     private static final List<Card> cards = new ArrayList<>(52);
+
+    public static final int HALF_THE_DECK = 26;
 
     public Deck() {
         refill();

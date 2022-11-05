@@ -10,7 +10,11 @@ import java.io.IOException;
 public class Hand {
     public AnchorPane cardsInPossesion;
 
-    private void renderAllCards() throws IOException {
+    public void sendRequestForCards() throws IOException {
+        model.Table.getOurPlayerModel().getHand().requestCards();
+    }
+
+    public void renderAllCards() throws IOException {
         int xOffset = 5;
         FXMLLoader loader;
         for (SimpleObjectProperty<model.Card> card : model.Table.getOurPlayerModel().getHand().getCards()) {

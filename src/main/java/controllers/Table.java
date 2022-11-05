@@ -1,13 +1,12 @@
 package controllers;
 
-import Exceptions.EmptyDeckException;
 import app.Kierki;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import model.Player;
 
 import java.io.IOException;
 
@@ -22,28 +21,38 @@ public class Table {
     @FXML
     private Text ourPlayerPoints;
 
-    public void init() throws IOException, EmptyDeckException {
-        AnchorPane firstHand = getFirstHand();
+    private Hand ourHandController;
 
-        AnchorPane secondHand = getSecondHand();
+    private Hand enemyHardController;
+
+    public void init() throws IOException {
+        AnchorPane enemyHand = getEnemyHand();
+
+        AnchorPane ourHand = getOurHand();
 
         initializeTextNodes();
-        table.getChildren().add(firstHand);
-        table.getChildren().add(secondHand);
-        secondHand.setLayoutY(450);
+        table.getChildren().add(enemyHand);
+        table.getChildren().add(ourHand);
+        ourHand.setLayoutY(450);
         Scene scene = Kierki.getScene();
         scene.setRoot(table);
+        ourHandController.sendRequestForCards();
+        ourHandController.renderAllCards();
         Kierki.getPrimaryStage().sizeToScene();
     }
 
-    private AnchorPane getSecondHand() throws IOException, EmptyDeckException {
-        FXMLLoader secondHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        return secondHandLoader.load();
+    private AnchorPane getOurHand() throws IOException {
+        FXMLLoader ourHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
+        AnchorPane ourHandView = ourHandLoader.load();
+        ourHandController = ourHandLoader.getController();
+        return ourHandView;
     }
 
-    private AnchorPane getFirstHand() throws IOException, EmptyDeckException {
-        FXMLLoader firstHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
-        return firstHandLoader.load();
+    private AnchorPane getEnemyHand() throws IOException {
+        FXMLLoader enemyHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
+        AnchorPane enemyHandView = enemyHandLoader.load();
+        enemyHardController = enemyHandLoader.getController();
+        return enemyHandView;
     }
 
     private void initializeTextNodes() {

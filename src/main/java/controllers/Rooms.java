@@ -2,6 +2,7 @@ package controllers;
 
 import Exceptions.BadRequestException;
 import Exceptions.EmptyDeckException;
+import Exceptions.InternalServerErrorException;
 import app.Kierki;
 import enums.RoomNumber;
 import javafx.event.ActionEvent;
