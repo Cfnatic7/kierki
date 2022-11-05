@@ -29,7 +29,8 @@ public class LoginForm {
 
     public static void handleLogout() throws IOException {
         Kierki.dataOut.writeUTF(Commands.LOGOUT.name());
-        String response = Kierki.dataIn.readUTF();
+        Kierki.dataIn.readUTF();
+        Kierki.dataIn.readUTF();
     }
 
 }

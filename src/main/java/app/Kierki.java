@@ -84,7 +84,6 @@ public class Kierki extends Application {
         primaryStage.setOnCloseRequest((ae) -> {
             try {
                 model.LoginForm.handleLogout();
-                model.Rooms.handleLeaveRoom();
             } catch (IOException e) {
                 System.out.println("Can't logout");
             }
