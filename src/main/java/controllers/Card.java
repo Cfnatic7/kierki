@@ -1,5 +1,6 @@
 package controllers;
 
+import app.Kierki;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +41,7 @@ public class Card {
             var cards = handPane.getChildren();
             cards.forEach(card -> card.setLayoutY(initialYLayout));
             this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
+            Kierki.setOurCardPane(this.cardPane);
         } catch (Exception e) {
             System.out.println("Card couldn't be send");
         }

@@ -39,6 +39,8 @@ public class Table {
         ourHandController.sendRequestForCards();
         ourHandController.renderAllCards();
         Kierki.getPrimaryStage().sizeToScene();
+        Kierki.setEnemyPlayerPoints(enemyPlayerPoints);
+        Kierki.setOurPlayerPoints(ourPlayerPoints);
     }
 
     private AnchorPane getOurHand() throws IOException {

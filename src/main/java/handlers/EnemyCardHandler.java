@@ -4,6 +4,7 @@ import app.Kierki;
 import controllers.Card;
 import enums.Commands;
 import enums.Rank;
+import enums.ServerResponses;
 import enums.Suit;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -30,8 +31,8 @@ public class EnemyCardHandler extends Thread {
     public void run() {
         while(isRunning) {
             try {
-                Commands command = Commands.valueOf(receiveEnemyCardDataIn.readUTF());
-                if (command == Commands.SEND_ENEMY_CARD) {
+                ServerResponses serverResponse = ServerResponses.valueOf(receiveEnemyCardDataIn.readUTF());
+                if (serverResponse == ServerResponses.SEND_ENEMY_CARD) {
                     Suit suit = Suit.valueOf(receiveEnemyCardDataIn.readUTF());
                     Rank rank = Rank.valueOf(receiveEnemyCardDataIn.readUTF());
                     System.out.println("Card received");
@@ -41,6 +42,26 @@ public class EnemyCardHandler extends Thread {
                         } catch(Exception e) {
                             System.out.println("Couldn't render card");
                         }
+                    });
+                }
+                else if (serverResponse == ServerResponses.POINTS) {
+                    int points = Integer.parseInt(Kierki.getOurPlayerPoints().getText().split(" ")[1]);
+                    points += Integer.parseInt(receiveEnemyCardDataIn.readUTF());
+                    String newText = "Points: " + points;
+                    Platform.runLater(() -> {
+                        Kierki.getOurPlayerPoints().setText(newText);
+                    });
+
+                }
+                else if (serverResponse == ServerResponses.ENEMY_POINTS) {
+                    int points = Integer.parseInt(Kierki.getEnemyPlayerPoints().getText().split(" ")[1]);
+                    points += Integer.parseInt(receiveEnemyCardDataIn.readUTF());
+                    String newText = "Points: " + points;
+                    Platform.runLater(() -> {
+                        Kierki.getEnemyPlayerPoints().setText(newText);
+                        // this is distusting
+                        ( (AnchorPane) Kierki.getOurCardPane().getParent()).getChildren().remove(Kierki.getOurCardPane());
+                        Kierki.getEnemyHandPane().getChildren().clear();
                     });
                 }
             } catch (IOException e) {

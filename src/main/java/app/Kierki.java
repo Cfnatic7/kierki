@@ -73,6 +73,12 @@ public class Kierki extends Application {
 
     private static AnchorPane enemyHandPane;
 
+    private static Text enemyPlayerPoints;
+
+    private static Text ourPlayerPoints;
+
+    private static AnchorPane ourCardPane;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
@@ -162,4 +168,27 @@ public class Kierki extends Application {
         Kierki.enemyHandPane = enemyHandPane;
     }
 
+    public static Text getEnemyPlayerPoints() {
+        return enemyPlayerPoints;
+    }
+
+    public static Text getOurPlayerPoints() {
+        return ourPlayerPoints;
+    }
+
+    public static void setEnemyPlayerPoints(Text enemyPlayerPoints) {
+        Kierki.enemyPlayerPoints = enemyPlayerPoints;
+    }
+
+    public static void setOurPlayerPoints(Text ourPlayerPoints) {
+        Kierki.ourPlayerPoints = ourPlayerPoints;
+    }
+
+    public static AnchorPane getOurCardPane() {
+        return ourCardPane;
+    }
+
+    public static void setOurCardPane(AnchorPane ourCardPane) {
+        Kierki.ourCardPane = ourCardPane;
+    }
 }
