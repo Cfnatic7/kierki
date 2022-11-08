@@ -67,6 +67,7 @@ public class EnemyCardHandler extends Thread {
                 else if (serverResponse == ServerResponses.ENEMY_POINTS) {
                     int points = Integer.parseInt(Kierki.getEnemyPlayerPoints().getText().split(" ")[1]);
                     points += Integer.parseInt(receiveEnemyCardDataIn.readUTF());
+                    System.out.println("Enemy points: " + points);
                     String newText = "Points: " + points;
                     Platform.runLater(() -> {
                         Kierki.getEnemyPlayerPoints().setText(newText);

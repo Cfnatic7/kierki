@@ -39,6 +39,7 @@ public class Card {
         try {
             System.out.println("Tryind to send card");
             Kierki.setOurCardPane(this.cardPane);
+            System.out.println("Clicked card: " + Kierki.getOurCardPane());
             this.cardModel.sendCardToServer();
         } catch (IOException e) {
             System.out.println("Card couldn't be send");

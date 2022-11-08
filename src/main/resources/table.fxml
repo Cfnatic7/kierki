@@ -12,12 +12,12 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Text fx:id="enemyPlayerPoints" layoutX="1233.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points: 0">
+      <Text fx:id="enemyPlayerPoints" layoutX="1207.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points: 0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text fx:id="ourPlayerPoints" layoutX="1233.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points: 0">
+      <Text fx:id="ourPlayerPoints" layoutX="1207.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points: 0">
          <font>
             <Font size="14.0" />
          </font>
