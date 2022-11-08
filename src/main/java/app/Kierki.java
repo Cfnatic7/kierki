@@ -79,6 +79,8 @@ public class Kierki extends Application {
 
     private static AnchorPane ourCardPane;
 
+    private static double initialYLayout;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
@@ -118,6 +120,7 @@ public class Kierki extends Application {
                 roomDataIn.close();
                 dataOut.close();
                 dataIn.close();
+                receiveEnemyCardSocket.close();
             } catch(Exception e) {
                 System.out.println("Can't close socket streams");
             }
@@ -190,5 +193,13 @@ public class Kierki extends Application {
 
     public static void setOurCardPane(AnchorPane ourCardPane) {
         Kierki.ourCardPane = ourCardPane;
+    }
+
+    public static double getInitialYLayout() {
+        return initialYLayout;
+    }
+
+    public static void setInitialYLayout(double initialYLayout) {
+        Kierki.initialYLayout = initialYLayout;
     }
 }

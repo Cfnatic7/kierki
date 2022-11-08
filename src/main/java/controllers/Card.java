@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+
 public class Card {
 
     @FXML
@@ -36,13 +38,9 @@ public class Card {
     public void onClick() {
         try {
             System.out.println("Tryind to send card");
-            this.cardModel.sendCardToServer();
-            AnchorPane handPane = (AnchorPane) this.cardPane.getParent();
-            var cards = handPane.getChildren();
-            cards.forEach(card -> card.setLayoutY(initialYLayout));
-            this.cardPane.setLayoutY(this.cardPane.getLayoutY() - 50);
             Kierki.setOurCardPane(this.cardPane);
-        } catch (Exception e) {
+            this.cardModel.sendCardToServer();
+        } catch (IOException e) {
             System.out.println("Card couldn't be send");
         }
     }

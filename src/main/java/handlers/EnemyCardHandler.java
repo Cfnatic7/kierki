@@ -44,6 +44,14 @@ public class EnemyCardHandler extends Thread {
                         }
                     });
                 }
+                else if (serverResponse == ServerResponses.PLAY_CARD_ACK) {
+                    AnchorPane cardPane = Kierki.getOurCardPane();
+                    AnchorPane handPane = (AnchorPane) cardPane.getParent();
+                    var cards = handPane.getChildren();
+                    double initialYLayout = cardPane.getLayoutY();
+                    cards.forEach(card -> card.setLayoutY(initialYLayout));
+                    cardPane.setLayoutY(cardPane.getLayoutY() - 50);
+                }
                 else if (serverResponse == ServerResponses.POINTS) {
                     int points = Integer.parseInt(Kierki.getOurPlayerPoints().getText().split(" ")[1]);
                     points += Integer.parseInt(receiveEnemyCardDataIn.readUTF());

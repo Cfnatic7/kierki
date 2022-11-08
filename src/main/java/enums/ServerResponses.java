@@ -8,6 +8,8 @@ public enum ServerResponses {
     ROOM_FULL,
     END_RECEIVE_CARDS,
     POINTS,
-    SEND_ENEMY_CARD,
     ENEMY_POINTS,
+    SEND_ENEMY_CARD,
+    PLAY_CARD_ACK,
+    MOVE_INCORRECT,
 }

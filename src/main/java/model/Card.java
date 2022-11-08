@@ -39,10 +39,9 @@ public class Card {
 
     public void sendCardToServer() throws IOException {
         Kierki.dataOut.writeUTF(Commands.PLAY_CARD.name());
-        Kierki.dataIn.readUTF();
         Kierki.dataOut.writeUTF(this.suit.name());
         Kierki.dataOut.writeUTF(this.rank.name());
-        Kierki.dataIn.readUTF();
+        System.out.println("Card sent");
     }
 
     public void setIsOpponent(boolean isOpponent) {
