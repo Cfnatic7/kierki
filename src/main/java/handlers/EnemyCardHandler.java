@@ -110,7 +110,7 @@ public class EnemyCardHandler extends Thread {
                     });
                 }
                 else if (serverResponse == ServerResponses.NEXT_ROUND) {
-                    Kierki.getOurHandPane().getChildren().clear();
+                    Platform.runLater(() -> Kierki.getOurHandPane().getChildren().clear());
                 }
             } catch (IOException e) {
                 System.out.println("Socket closed");
