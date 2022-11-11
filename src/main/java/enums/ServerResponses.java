@@ -11,5 +11,6 @@ public enum ServerResponses {
     ENEMY_POINTS,
     SEND_ENEMY_CARD,
     PLAY_CARD_ACK,
-    MOVE_INCORRECT,
+    SEND_HAND,
+    NEXT_ROUND,
 }

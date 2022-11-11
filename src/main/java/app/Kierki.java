@@ -81,6 +81,8 @@ public class Kierki extends Application {
 
     private static double initialYLayout;
 
+    private static AnchorPane ourHandPane;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
@@ -201,5 +203,13 @@ public class Kierki extends Application {
 
     public static void setInitialYLayout(double initialYLayout) {
         Kierki.initialYLayout = initialYLayout;
+    }
+
+    public static AnchorPane getOurHandPane() {
+        return ourHandPane;
+    }
+
+    public static void setOurHandPane(AnchorPane ourHandPane) {
+        Kierki.ourHandPane = ourHandPane;
     }
 }

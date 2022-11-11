@@ -30,6 +30,8 @@ public class Table {
 
         AnchorPane ourHand = getOurHand();
 
+        Kierki.setOurHandPane(ourHand);
+
         initializeTextNodes();
         table.getChildren().add(enemyHand);
         table.getChildren().add(ourHand);

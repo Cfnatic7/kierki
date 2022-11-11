@@ -9,10 +9,13 @@ import enums.Suit;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import model.Deck;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnemyCardHandler extends Thread {
 
@@ -75,6 +78,39 @@ public class EnemyCardHandler extends Thread {
                         ( (AnchorPane) Kierki.getOurCardPane().getParent()).getChildren().remove(Kierki.getOurCardPane());
                         Kierki.getEnemyHandPane().getChildren().clear();
                     });
+                }
+                else if (serverResponse == ServerResponses.SEND_HAND) {
+                    List<model.Card> cards = new ArrayList<>();
+                    for (int i = 0; i < Deck.HALF_THE_DECK; i++) {
+                        Suit suit = Suit.valueOf(receiveEnemyCardDataIn.readUTF());
+                        Rank rank = Rank.valueOf(receiveEnemyCardDataIn.readUTF());
+                        cards.add(new model.Card(rank, suit));
+                    }
+                    Platform.runLater(() -> {
+                        int xOffset = 5;
+                        FXMLLoader loader;
+                        for (model.Card card : cards) {
+                            loader = new FXMLLoader();
+                            AnchorPane cardPane = null;
+                            try {
+                                cardPane = loader.load(getClass().getResource("/card.fxml").openStream());
+                            } catch (IOException e) {
+                                System.out.println("Couldn't load card");
+                                throw new RuntimeException(e);
+                            }
+                            Card cardController = loader.getController();
+                            cardController.initModel(card);
+                            cardPane.setLayoutX(cardPane.getLayoutX() + xOffset);
+                            cardPane.setLayoutY(cardPane.getLayoutY() + 75);
+                            cardController.setInitialYLayout(cardPane.getLayoutY());
+
+                            xOffset += 40;
+                            Kierki.getOurHandPane().getChildren().add(cardPane);
+                        }
+                    });
+                }
+                else if (serverResponse == ServerResponses.NEXT_ROUND) {
+                    Kierki.getOurHandPane().getChildren().clear();
                 }
             } catch (IOException e) {
                 System.out.println("Socket closed");
