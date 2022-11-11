@@ -86,6 +86,8 @@ public class EnemyCardHandler extends Thread {
                         Rank rank = Rank.valueOf(receiveEnemyCardDataIn.readUTF());
                         cards.add(new model.Card(rank, suit));
                     }
+                    assert ServerResponses.valueOf(receiveEnemyCardDataIn.readUTF())
+                            .equals(ServerResponses.END_RECEIVE_CARDS);
                     Platform.runLater(() -> {
                         int xOffset = 5;
                         FXMLLoader loader;
@@ -110,7 +112,18 @@ public class EnemyCardHandler extends Thread {
                     });
                 }
                 else if (serverResponse == ServerResponses.NEXT_ROUND) {
-                    Platform.runLater(() -> Kierki.getOurHandPane().getChildren().clear());
+                    Platform.runLater(() -> {
+                        Kierki.getOurHandPane().getChildren().clear();
+                        Kierki.getEnemyHandPane().getChildren().clear();
+                    });
+                }
+                else if (serverResponse == ServerResponses.RESET) {
+                    Platform.runLater(() -> {
+                        Kierki.getOurPlayerPoints().setText("Points: 0");
+                        Kierki.getEnemyPlayerPoints().setText("Points: 0");
+                        Kierki.getOurHandPane().getChildren().clear();
+                        Kierki.getEnemyHandPane().getChildren().clear();
+                    });
                 }
             } catch (IOException e) {
                 System.out.println("Socket closed");

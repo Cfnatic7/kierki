@@ -13,4 +13,5 @@ public enum ServerResponses {
     PLAY_CARD_ACK,
     SEND_HAND,
     NEXT_ROUND,
+    RESET,
 }
