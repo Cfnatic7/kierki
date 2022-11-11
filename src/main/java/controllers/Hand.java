@@ -12,10 +12,6 @@ public class Hand {
     @FXML
     private AnchorPane handPane;
 
-    public void sendRequestForCards() throws IOException {
-        model.Table.getOurPlayerModel().getHand().requestCards();
-    }
-
     public void renderSingleCard(model.Card card) throws IOException {
         handPane.getChildren().clear();
         FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/card.fxml"));

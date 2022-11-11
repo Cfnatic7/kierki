@@ -30,7 +30,7 @@ public class Table {
 
         AnchorPane ourHand = getOurHand();
 
-        Kierki.setOurHandPane(ourHand);
+
 
         initializeTextNodes();
         table.getChildren().add(enemyHand);
@@ -38,8 +38,6 @@ public class Table {
         ourHand.setLayoutY(450);
         Scene scene = Kierki.getScene();
         scene.setRoot(table);
-        ourHandController.sendRequestForCards();
-        ourHandController.renderAllCards();
         Kierki.getPrimaryStage().sizeToScene();
         Kierki.setEnemyPlayerPoints(enemyPlayerPoints);
         Kierki.setOurPlayerPoints(ourPlayerPoints);
@@ -49,6 +47,7 @@ public class Table {
         FXMLLoader ourHandLoader = new FXMLLoader(getClass().getResource("/hand.fxml"));
         AnchorPane ourHandView = ourHandLoader.load();
         ourHandController = ourHandLoader.getController();
+        Kierki.setOurHandPane(ourHandView);
         return ourHandView;
     }
 
