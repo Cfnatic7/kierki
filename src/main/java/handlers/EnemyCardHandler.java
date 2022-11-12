@@ -6,9 +6,12 @@ import enums.Commands;
 import enums.Rank;
 import enums.ServerResponses;
 import enums.Suit;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import model.Deck;
 
 import java.io.DataInputStream;
@@ -72,12 +75,14 @@ public class EnemyCardHandler extends Thread {
                     points += Integer.parseInt(receiveEnemyCardDataIn.readUTF());
                     System.out.println("Enemy points: " + points);
                     String newText = "Points: " + points;
-                    Platform.runLater(() -> {
-                        Kierki.getEnemyPlayerPoints().setText(newText);
+                    Kierki.getEnemyPlayerPoints().setText(newText);
+                    KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), e -> {
                         // this is distusting
                         ( (AnchorPane) Kierki.getOurCardPane().getParent()).getChildren().remove(Kierki.getOurCardPane());
                         Kierki.getEnemyHandPane().getChildren().clear();
                     });
+                    Timeline timeline = new Timeline(keyFrame);
+                    Platform.runLater(timeline::play);
                 }
                 else if (serverResponse == ServerResponses.SEND_HAND) {
                     List<model.Card> cards = new ArrayList<>();
